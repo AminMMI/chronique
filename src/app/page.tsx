@@ -1,3 +1,5 @@
+"use client";
+
 import { client } from "@/sanity/lib/sanity";
 import Link from "next/link";
 
