@@ -28,20 +28,20 @@ export default async function Home() {
     </p>
     <div class="tags">
       <span class="tag">Fantasy</span>
-      <span className="tag">Aventure</span>
-      <span className="tag">Sombre</span>
+      <span class="tag">Aventure</span>
+      <span class="tag">Sombre</span>
     </div>
   </section>
 
     {/* DERNIERS CHAPITRES */}
-  <section className="last-chapters">
-    <h2 className="section-title">Derniers chapitres</h2>
-    <ul className="chapters-list">
+  <section class="last-chapters">
+    <h2 class="section-title">Derniers chapitres</h2>
+    <ul class="chapters-list">
       {chapitres.map((c: any) =>
         c.slug?.current ? (
-          <li key={c.slug.current} className="chapter-item">
-            <Link href={`/chapitre/${c.slug.current}`} className="chapter-link">
-              <h3 className="chapter-title">{c.title}</h3>
+          <li key={c.slug.current} class="chapter-item">
+            <Link href={`/chapitre/${c.slug.current}`} class="chapter-link">
+              <h3 class="chapter-title">{c.title}</h3>
             </Link>
           </li>
         ) : null

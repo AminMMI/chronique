@@ -1,6 +1,11 @@
 {
   "build": {
+    "env": {
+      "NEXT_PUBLIC_SANITY_PROJECT_ID": "kyo7txd8",
+      "NEXT_PUBLIC_SANITY_DATASET": "production"
+    },
     "installCommand": "npm install --legacy-peer-deps",
-    "command": "npm run build"
+    "command": "npm run build",
+    "outputDirectory": ".next"
   }
 }
