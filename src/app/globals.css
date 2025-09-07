@@ -1,26 +1,320 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Corps du texte et fond */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  color: #e5e5e5;
+  font-family: Georgia, serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("../assets/img/background.jpeg") no-repeat center center / cover;
+  filter: blur(8px); /* flou */
+  z-index: -1; /* reste derrière le contenu */
+  transform: scale(1.1); /* évite de voir les bords nets du flou */
+}
+
+
+/* Bar de navigation */
+
+.navbar {
+  display: flex;
+  flex-direction: column; /* mobile par défaut */
+  align-items: flex-start;
+  background-color: rgba(20, 20, 30, 0.9);
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar a {
+  color: #fbbf24;
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+  margin: 0.5rem 0; /* espacement vertical mobile */
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #fff;
+  text-shadow: 0 0 5px #fbbf24;
+}
+
+/* HERO */
+.home-title {
+  font-size: 3rem;
+  text-align: center;
+  color: #d4af37;
+  margin: 2rem 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* DERNIERS CHAPITRES */
+.section-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #d4af37;
+}
+
+.chapters-list {
+  list-style: none;
+  padding: 0;
+}
+
+.chapter-item {
+  margin-bottom: 1rem;
+}
+
+.chapter-link {
+  display: block;
+  padding: 1rem;
+  width: 80%;
+  margin: auto;
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+  color: #e5e5e5;
+  box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+  transition: background 0.3s, transform 0.2s;
+}
+
+.chapter-link:hover {
+  background: #2a2a2a;
+  transform: translateY(-2px);
+}
+
+.chapter-title {
+  font-size: 1.5rem;
+  color: #f5c542;
+}
+
+/* SYNOPSIS */
+.synopsis {
+  text-align: center;
+  max-width: 600px;
+  margin: 3rem auto;
+  line-height: 1.6;
+}
+
+.tags {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.tag {
+  padding: 0.4rem 0.8rem;
+  background: #222;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  color: #facc15;
+}
+
+
+/* Boutons précédent / suivant */
+.chapter-nav a {
+  color: #10b981; /* vert mystique */
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.chapter-nav a:hover {
+  color: #6ee7b7;
+}
+
+
+/* PAGE CHAPITRE */
+.chapitre-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #0a0a0a;
+  color: #e5e5e5;
+  min-height: 100vh;
+  font-family: Georgia, serif;
+}
+
+.chapitre-title {
+  font-size: 2.5rem;
+  color: #d4af37;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.chapitre-body {
+  margin-bottom: 3rem;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.chapitre-body p {
+  margin-bottom: 1.2rem;
+}
+
+/* NAVIGATION */
+.chapitre-nav {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+}
+
+.nav-link {
+  color: #34d399; /* vert émeraude */
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #6ee7b7;
+}
+
+.nav-link.prev {
+  margin-right: auto;
+}
+
+.nav-link.next {
+  margin-left: auto;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  color: #d4af37;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.chapitres-list {
+  list-style: none;
+  padding: 0;
+}
+
+.chapitre-item {
+  margin: 1rem 0;
+}
+
+.chapitre-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: #f5c542;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.chapitre-link:hover {
+  background: #2a2a2a;
+}
+
+/* A propos */
+
+.a-propos div {
+  text-align: center;
+  background-color: #333333a8;
+  padding: 7px 10px;
+  width: 90%;
+  margin: auto;
+  border-radius: 20px;
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+}
+
+/* Lore */
+
+.lore-page {
+  text-align: center;
+    background-color: #333333a8;
+  padding: 7px 10px;
+  width: 90%;
+  margin: 10px auto;
+  border-radius: 20px;
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.75)
+}
+
+.lore-table {
+  width: 100%;
+  border-collapse: collapse;
+  width: 80%;
+  table-layout: fixed;
+  margin: 20px auto;
+  font-family: Georgia, serif;
+  color: #e5e5e5;
+  background: rgba(10, 10, 10, 0.85);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+  text-align: center;
+}
+
+.lore-table th,
+.lore-table td {
+  width: 33%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #444;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lore-table thead th {
+  background: rgba(50, 30, 10, 0.8);
+  color: #d4af37;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.lore-table tbody tr:nth-child(odd) {
+  background: rgba(30, 30, 30, 0.5);
+}
+
+.lore-table tbody tr:hover {
+  background: rgba(60, 40, 10, 0.6);
+}
+
+.lore-table td {
+  color: #ccc;
+}
+
+.lore-carte {
+  margin-top: 50px;
+}
+
+.lore-carte img {
+  transition: all ease-in-out 0.7s;
+}
+
+.lore-carte img:hover {
+  scale: 1.1;
+}
+
+/* Version dekstop */
+
+@media (min-width: 768px) {
+  .navbar {
+    flex-direction: row; /* horizontal sur desktop */
+    justify-content: space-between;
+    align-items: center;
+  }
+  .navbar a {
+    margin: 0 1rem; /* espacement horizontal desktop */
+  }
 }
