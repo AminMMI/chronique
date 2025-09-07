@@ -13,13 +13,13 @@ export default async function ChapitresPage() {
   const chapitres = await getChapitres();
 
   return (
-    <main className="chapter-page">
-      <h1 className="page-title">Tous les chapitres</h1>
-      <ul className="chapters-list">
+    <main class="chapter-page">
+      <h1 class="page-title">Tous les chapitres</h1>
+      <ul class="chapters-list">
         {chapitres.map((c: any) =>
           c.slug?.current ? (
-            <li key={c.slug.current} className="chapter-item">
-              <Link href={`/chapitre/${c.slug.current}`} className="chapter-link">
+            <li key={c.slug.current} class="chapter-item">
+              <Link href={`/chapitre/${c.slug.current}`} class="chapter-link">
                 {c.title}
               </Link>
             </li>

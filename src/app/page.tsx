@@ -13,21 +13,21 @@ export default async function Home() {
   const chapitres = await getChapitres();
 
   return (
-    <main className="home">
+    <main class="home">
   {/* HERO */}
-  <h1 className="home-title">
+  <h1 class="home-title">
     Chronique d'un sans éclat
   </h1>
 
 
 
   {/* SYNOPSIS */}
-  <section className="synopsis">
+  <section class="synopsis">
     <p>
       Plongé dans un monde ravagé par une guerre de pouvoir, certains hommes et femmes se réunissent autour de la table ronde dans un seul but : devenir seigneurs et rétablir l'ordre et la justice sur ces terres désolées. On les appelle sans éclat, des êtres autrefois morts et ressuscités par la grâce de l'arbre monde. Parias de la société, ils viennent de n'importe où dans le monde, ils ont chacun des objectifs personnels mais tous convergent vers un but commun. Ortros fait partie de cet ordre, mais fraîchement réveillé par l'arbre monde, ses souvenirs lui manquent. Arrivera-t-il à survivre dans ce monde sauvage ? Cette deuxième vie lui sera-t-elle profitable ou sombrera-t-il dans l'oubli.
     </p>
-    <div className="tags">
-      <span className="tag">Fantasy</span>
+    <div class="tags">
+      <span class="tag">Fantasy</span>
       <span className="tag">Aventure</span>
       <span className="tag">Sombre</span>
     </div>

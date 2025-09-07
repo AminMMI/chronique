@@ -1,7 +1,7 @@
 export default function AProposPage() {
   return (
-    <main className="a-propos">
-      <h1 className="page-title">À propos</h1>
+    <main class="a-propos">
+      <h1 class="page-title">À propos</h1>
       <div>
         <h2>Qu'est ce que c'est ?</h2>
         <p>

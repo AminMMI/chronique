@@ -33,24 +33,24 @@ export default async function ChapitrePage({ params }: ChapitreParams) {
   const nextChapitre = index < filteredChapitres.length - 1 ? filteredChapitres[index + 1] : null;
 
   return (
-    <main className="chapitre-page">
-      <h1 className="chapitre-title">{chapitre.title}</h1>
+    <main class="chapitre-page">
+      <h1 class="chapitre-title">{chapitre.title}</h1>
 
-      <article className="chapitre-body">
+      <article class="chapitre-body">
         {chapitre.body?.map((block: any, i: number) => (
           <p key={i}>{block.children?.map((span: any) => span.text).join(" ")}</p>
         ))}
       </article>
 
-      <nav className="chapitre-nav">
+      <nav class="chapitre-nav">
         {prevChapitre ? (
-          <a href={`/chapitre/${prevChapitre.slug.current}`} className="nav-link prev">
+          <a href={`/chapitre/${prevChapitre.slug.current}`} class="nav-link prev">
             ← {prevChapitre.title}
           </a>
         ) : <div />}
 
         {nextChapitre ? (
-          <a href={`/chapitre/${nextChapitre.slug.current}`} className="nav-link next">
+          <a href={`/chapitre/${nextChapitre.slug.current}`} class="nav-link next">
             {nextChapitre.title} →
           </a>
         ) : <div />}

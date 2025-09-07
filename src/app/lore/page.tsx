@@ -3,8 +3,8 @@ import carte from '../../assets/img/carte.png';
 
 export default function LorePage() {
   return (
-    <main className="lore-page">
-      <h1 className="page-title">Lore</h1>
+    <main class="lore-page">
+      <h1 class="page-title">Lore</h1>
       <p>
         À travers cette page, vous découvrirez les fragments d’histoire, les
         mythes et les légendes qui nourrissent la trame du récit. Plus précisemment, le passé et le contexte politique du monde actuel.
