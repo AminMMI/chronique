@@ -1,8 +1,12 @@
 import { client } from "@/sanity/lib/sanity";
+import Link from "next/link";
+
 export const dynamic = "force-dynamic";
 
-interface ChapitreParams {
-  params: { slug: string };
+interface PageProps {
+  params: {
+    slug: string;
+  };
 }
 
 async function getChapitre(slug: string) {
@@ -10,7 +14,7 @@ async function getChapitre(slug: string) {
     title,
     body
   }`;
-  return await client.fetch(query, { slug });
+  return client.fetch(query, { slug });
 }
 
 async function getAllChapitres() {
@@ -18,10 +22,10 @@ async function getAllChapitres() {
     title,
     slug
   }`;
-  return await client.fetch(query);
+  return client.fetch(query);
 }
 
-export default async function ChapitrePage({ params }: ChapitreParams) {
+export default async function ChapitrePage({ params }: PageProps) {
   const chapitre = await getChapitre(params.slug);
   if (!chapitre) return <p>Chapitre introuvable ❌</p>;
 
@@ -33,28 +37,24 @@ export default async function ChapitrePage({ params }: ChapitreParams) {
   const nextChapitre = index < filteredChapitres.length - 1 ? filteredChapitres[index + 1] : null;
 
   return (
-    <main class="chapitre-page">
-      <h1 class="chapitre-title">{chapitre.title}</h1>
+    <div class="chapitre-page">
+      <h1>{chapitre.title}</h1>
+      <div class="chapitre-body">
+        {chapitre.body && JSON.stringify(chapitre.body)}
+      </div>
 
-      <article class="chapitre-body">
-        {chapitre.body?.map((block: any, i: number) => (
-          <p key={i}>{block.children?.map((span: any) => span.text).join(" ")}</p>
-        ))}
-      </article>
-
-      <nav class="chapitre-nav">
-        {prevChapitre ? (
-          <a href={`/chapitre/${prevChapitre.slug.current}`} class="nav-link prev">
+      <div class="chapitre-navigation">
+        {prevChapitre && (
+          <Link href={`/chapitre/${prevChapitre.slug.current}`}>
             ← {prevChapitre.title}
-          </a>
-        ) : <div />}
-
-        {nextChapitre ? (
-          <a href={`/chapitre/${nextChapitre.slug.current}`} class="nav-link next">
+          </Link>
+        )}
+        {nextChapitre && (
+          <Link href={`/chapitre/${nextChapitre.slug.current}`}>
             {nextChapitre.title} →
-          </a>
-        ) : <div />}
-      </nav>
-    </main>
+          </Link>
+        )}
+      </div>
+    </div>
   );
 }

@@ -1,16 +1,24 @@
 import { client } from "@/sanity/lib/sanity";
 import Link from "next/link";
 
-async function getChapitres() {
-  const query = `*[_type == "post"] | order(_createdAt asc){
-    title,
-    slug
-  }`;
-  return await client.fetch(query);
+interface PageProps {
+  params: {
+    slug: string;
+  };
 }
 
-export default async function Home() {
-  const chapitres = await getChapitres();
+async function getChapitre(slug: string) {
+  const query = `*[_type == "post" && slug.current == $slug][0]{
+    title,
+    body
+  }`;
+  return client.fetch(query, { slug });
+}
+
+export default async function ChapitrePage({ params }: PageProps) {
+  const chapitre = await getChapitre(params.slug);
+
+  if (!chapitre) return <p>Chapitre introuvable</p>;
   return (
     <main class="home">
   {/* HERO */}
