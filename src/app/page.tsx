@@ -1,5 +1,3 @@
-"use client";
-
 import { client } from "@/sanity/lib/sanity";
 import Link from "next/link";
 
@@ -13,7 +11,6 @@ async function getChapitres() {
 
 export default async function Home() {
   const chapitres = await getChapitres();
-
   return (
     <main class="home">
   {/* HERO */}
