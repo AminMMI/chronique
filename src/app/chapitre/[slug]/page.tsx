@@ -3,12 +3,6 @@ import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
-
 async function getChapitre(slug: string) {
   const query = `*[_type == "post" && slug.current == $slug][0]{
     title,
@@ -25,17 +19,29 @@ async function getAllChapitres() {
   return client.fetch(query);
 }
 
-export default async function ChapitrePage({ params }: PageProps) {
+export default async function ChapitrePage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const chapitre = await getChapitre(params.slug);
   if (!chapitre) return <p>Chapitre introuvable ❌</p>;
 
   const chapitres = await getAllChapitres();
-  const filteredChapitres = chapitres.filter(c => c.slug?.current);
+  const filteredChapitres = chapitres.filter(
+    (c: any) => c.slug?.current
+  );
 
-  const index = filteredChapitres.findIndex(c => c.slug.current === params.slug);
-  const prevChapitre = index > 0 ? filteredChapitres[index - 1] : null;
-  const nextChapitre = index < filteredChapitres.length - 1 ? filteredChapitres[index + 1] : null;
+  const index = filteredChapitres.findIndex(
+    (c: any) => c.slug.current === params.slug
+  );
 
+  const prevChapitre =
+    index > 0 ? filteredChapitres[index - 1] : null;
+  const nextChapitre =
+    index < filteredChapitres.length - 1
+      ? filteredChapitres[index + 1]
+      : null;
   return (
     <div class="chapitre-page">
       <h1>{chapitre.title}</h1>

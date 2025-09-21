@@ -14,12 +14,16 @@ async function getChapitre(slug: string): Promise<Chapitre | null> {
   return client.fetch(query, { slug });
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const chapitre = await getChapitre(params.slug);
 
   if (!chapitre) {
     return <p>Chapitre introuvable ❌</p>;
-  }  
+  }
   
   return (
     <main class="home">
