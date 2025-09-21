@@ -1,13 +1,12 @@
 import { client } from "@/sanity/lib/sanity";
 import Link from "next/link";
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
+interface Chapitre {
+  title: string;
+  body: any;
 }
 
-async function getChapitre(slug: string) {
+async function getChapitre(slug: string): Promise<Chapitre | null> {
   const query = `*[_type == "post" && slug.current == $slug][0]{
     title,
     body
@@ -15,11 +14,12 @@ async function getChapitre(slug: string) {
   return client.fetch(query, { slug });
 }
 
-export default async function ChapitrePage({ params }: PageProps) {
+export default async function Page({ params }: { params: { slug: string } }) {
   const chapitre = await getChapitre(params.slug);
 
-  if (!chapitre) return <p>Chapitre introuvable</p>;
-  return (
+  if (!chapitre) {
+    return <p>Chapitre introuvable ❌</p>;
+  }  return (
     <main class="home">
   {/* HERO */}
   <h1 class="home-title">
