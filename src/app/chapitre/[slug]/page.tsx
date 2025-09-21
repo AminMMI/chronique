@@ -3,7 +3,12 @@ import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
-async function getChapitre(slug: string) {
+interface Chapitre {
+  title: string;
+  body: any;
+}
+
+async function getChapitre(slug: string): Promise<Chapitre | null> {
   const query = `*[_type == "post" && slug.current == $slug][0]{
     title,
     body
@@ -19,29 +24,17 @@ async function getAllChapitres() {
   return client.fetch(query);
 }
 
-export default async function ChapitrePage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function ChapitrePage({ params }: { params: { slug: string } }) {
   const chapitre = await getChapitre(params.slug);
   if (!chapitre) return <p>Chapitre introuvable ❌</p>;
 
   const chapitres = await getAllChapitres();
-  const filteredChapitres = chapitres.filter(
-    (c: any) => c.slug?.current
-  );
+  const filteredChapitres = chapitres.filter(c => c.slug?.current);
 
-  const index = filteredChapitres.findIndex(
-    (c: any) => c.slug.current === params.slug
-  );
+  const index = filteredChapitres.findIndex(c => c.slug.current === params.slug);
+  const prevChapitre = index > 0 ? filteredChapitres[index - 1] : null;
+  const nextChapitre = index < filteredChapitres.length - 1 ? filteredChapitres[index + 1] : null;
 
-  const prevChapitre =
-    index > 0 ? filteredChapitres[index - 1] : null;
-  const nextChapitre =
-    index < filteredChapitres.length - 1
-      ? filteredChapitres[index + 1]
-      : null;
   return (
     <div class="chapitre-page">
       <h1>{chapitre.title}</h1>
