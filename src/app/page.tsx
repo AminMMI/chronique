@@ -19,9 +19,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   if (!chapitre) {
     return <p>Chapitre introuvable ❌</p>;
-  }  return (
+  }  
+  
+  return (
     <main class="home">
-  {/* HERO */}
+  
+    {/* HERO */}
   <h1 class="home-title">
     Chronique d'un sans éclat
   </h1>
